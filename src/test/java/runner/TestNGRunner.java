@@ -46,7 +46,9 @@ public class TestNGRunner {
         TestNG testng = new TestNG();
         testng.setXmlSuites(suites);
         testng.run();
-
+   if(testng.hasFailure()){
+       System.exit(1);
+   }
 
     }
 }
