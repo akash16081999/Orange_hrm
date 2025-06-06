@@ -34,6 +34,7 @@ jobs:
       run: java "-Dbrowser=chrome" "-Durl=https://opensource-demo.orangehrmlive.com/web/index.php/auth/login" "-Demail=Admin" "-Dpassword=admin123" -DgroupToRun= -jar orangeHRM-1.0-SNAPSHOT-jar-with-dependencies-and-tests.jar
    
     - name: Send Email with Report
+      if: always()  # ✅ This makes sure the step runs even if earlier steps fail
       uses: dawidd6/action-send-mail@v3
       with:
         server_address: smtp.gmail.com
