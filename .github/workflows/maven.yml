@@ -32,7 +32,26 @@ jobs:
        
     - name: Run Tests via JAR
       run: java "-Dbrowser=chrome" "-Durl=https://opensource-demo.orangehrmlive.com/web/index.php/auth/login" "-Demail=Admin" "-Dpassword=admin123" -DgroupToRun= -jar orangeHRM-1.0-SNAPSHOT-jar-with-dependencies-and-tests.jar
-        
+   
+    - name: Send Email with Report
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.gmail.com
+        server_port: 465
+        username: ${{ secrets.EMAIL_USERNAME }}
+        password: ${{ secrets.EMAIL_PASSWORD }}
+        subject: Test Report - OrangeHRM
+        body: |
+          Hello,
+
+          Please find attached the latest test execution report for OrangeHRM automation.
+
+          Regards,
+          GitHub Actions
+        to: akashn1608@gmail.com
+        from: GitHub Actions <akash.email@example.com>
+        attachments: target/reports/report.html
+
       
 
     # # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
