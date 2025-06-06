@@ -12,7 +12,7 @@ public class LoginTest extends BaseTest {
     public void loginToOrangeHrm() {
         LoginPage lp = new LoginPage(DriverFactory.getDr());
         lp.login();
-        Assert.assertEquals(DriverFactory.getDr().getCurrentUrl(),"https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/indexfjjfgdjhg");
+        Assert.assertEquals(DriverFactory.getDr().getCurrentUrl(),"https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index");
 
     }
 }
