@@ -11,17 +11,16 @@
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+
         <!-- Ensures test classes go into the same output dir -->
         <testOutputDirectory>${project.build.outputDirectory}</testOutputDirectory>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
-
     <dependencies>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.32.0</version>
+            <version>4.33.0</version> <!-- Or latest -->
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>
@@ -29,6 +28,18 @@
             <version>7.10.2</version>
         </dependency>
 
+        <!--        &lt;!&ndash; https://mvnrepository.com/artifact/io.qameta.allure/allure-testng&ndash;&gt;-->
+        <!--        <dependency>-->
+        <!--            <groupId>io.qameta.allure</groupId>-->
+        <!--            <artifactId>allure-testng</artifactId>-->
+        <!--            <version>2.29.1</version>-->
+        <!--        </dependency>-->
+        <!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
+        <dependency>
+            <groupId>com.aventstack</groupId>
+            <artifactId>extentreports</artifactId>
+            <version>5.1.2</version>
+        </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>

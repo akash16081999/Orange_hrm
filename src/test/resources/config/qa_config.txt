@@ -11,5 +11,5 @@
 cli cmd : java -Dbrowser=chrome -Durl=https://opensource-demo.orangehrmlive.com/web/index.php/auth/login -jar Naukriapp-1.0-SNAPSHOT-jar-with-dependencies-and-tests.jar
 mvn test cmd : mvn test "-Dbrowser=chrome" "-Durl=https://opensource-demo.orangehrmlive.com/web/index.php/auth/login" "-Demail=Admin" "-Dpassword=admin123" -DgroupToRun=
 
-mvn package cmd : mvn clean package "-Dbrowser=chrome" "-Durl=https://opensource-demo.orangehrmlive.com/web/index.php/auth/login" "-Demail=Admin" "-Dpassword=admin123" -DgroupToRun= -DskipTests=false
+mvn package cmd : mvn clean package -DskipTests=true
 cli jar execution cmd :java -DskipTests=false "-Dbrowser=chrome" "-Durl=https://opensource-demo.orangehrmlive.com/web/index.php/auth/login" "-Demail=Admin" "-Dpassword=admin123" -DgroupToRun= -jar orangeHRM-1.0-SNAPSHOT-jar-with-dependencies-and-tests.jar

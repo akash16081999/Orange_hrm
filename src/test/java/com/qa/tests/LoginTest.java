@@ -1,18 +1,55 @@
 package com.qa.tests;
 
 import com.qa.base.BaseTest;
-import com.qa.base.DriverFactory;
-import com.qa.pages.LoginPage;
+import com.qa.pages.PageManager;
+import com.qa.utils.TestDataProvider;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest {
 
-    @Test
+
+    @Test(groups = {"reg", "smoke"})
     public void loginToOrangeHrm() {
-        LoginPage lp = new LoginPage(DriverFactory.getDr());
-        lp.login();
-        Assert.assertEquals(DriverFactory.getDr().getCurrentUrl(),"https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index");
+      System.out.println("test invoked");
+        PageManager.getPageManagerObj().getLoginpageObject().login();
+        Assert.assertEquals(getDriver().getCurrentUrl(), "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index");
 
     }
+
+
+    @Test(groups = {"reg"}, dataProvider = "InvalidPassword", dataProviderClass = TestDataProvider.class)
+    public void loginWithInvaidPassword(String username, String pass) {
+
+        PageManager.getPageManagerObj().getLoginpageObject().login(username, pass);
+        Assert.assertTrue(PageManager.getPageManagerObj().getLoginpageObject().getInvalidAlertTxt().isDisplayed());
+        Assert.assertEquals(PageManager.getPageManagerObj().getLoginpageObject().getInvalidAlertTxt().getText(), "Invalid credentials");
+
+
+    }
+
+    @Test(groups = {"reg"}, dataProvider = "Emptyusername", dataProviderClass = TestDataProvider.class)
+    public void loginWithBlankUserName(String username, String pass) {
+        PageManager.getPageManagerObj().getLoginpageObject().login(username, pass);
+        Assert.assertTrue(PageManager.getPageManagerObj().getLoginpageObject().getAlertForEmptyUsername().isDisplayed());
+        Assert.assertEquals(PageManager.getPageManagerObj().getLoginpageObject().getAlertForEmptyUsername().getText(), "Required");
+
+    }
+
+    @Test(groups = {"reg"}, dataProvider = "Emptypassword", dataProviderClass = TestDataProvider.class)
+    public void loginWithBlankPassword(String username, String pass) {
+        PageManager.getPageManagerObj().getLoginpageObject().login(username, pass);
+        Assert.assertTrue(PageManager.getPageManagerObj().getLoginpageObject().getAlertForEmptyUsername().isDisplayed());
+        Assert.assertEquals(PageManager.getPageManagerObj().getLoginpageObject().getAlertForEmptyUsername().getText(), "Required");
+
+    }
+
+    @Test(groups = {"reg"})
+    public void loginPageUiButtonvisible() {
+
+        Assert.assertTrue(PageManager.getPageManagerObj().getLoginpageObject().usenameIsDisplayed());
+        Assert.assertTrue(PageManager.getPageManagerObj().getLoginpageObject().passwordIsDisplayed());
+        Assert.assertTrue(PageManager.getPageManagerObj().getLoginpageObject().loginBtnIsDisplayed());
+    }
+
 }

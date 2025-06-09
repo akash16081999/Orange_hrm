@@ -8,26 +8,68 @@ public class LoginPage {
     private WebDriver driver;
     private WebElement usernamefield;
     private WebElement passwordfield;
-    private WebElement loginBtb;
+    private WebElement loginBtn;
+
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
         usernamefield = this.driver.findElement(By.name("username"));
         passwordfield = this.driver.findElement(By.name("password"));
-        loginBtb = this.driver.findElement(By.xpath("//button[@type='submit']"));
+        loginBtn = this.driver.findElement(By.xpath("//button[@type='submit']"));
+
     }
 
     public void login() {
 
         usernamefield.sendKeys(System.getProperty("email"));
         passwordfield.sendKeys(System.getProperty("password"));
-        loginBtb.click();
+        loginBtn.click();
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
+
+
+    public void login(String username, String pass) {
+
+
+        System.out.println(username);
+        usernamefield.sendKeys(username);
+        passwordfield.sendKeys(pass);
+        loginBtn.click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public WebElement getInvalidAlertTxt() {
+        return this.driver.findElement(By.xpath("//p[text()='Invalid credentials']"));
+    }
+
+    public WebElement getAlertForEmptyUsername() {
+        return this.driver.findElement(By.xpath("//span[text()='Required']"));
+
+
+    }
+
+    public boolean usenameIsDisplayed() {
+        return usernamefield.isDisplayed();
+    }
+
+    public boolean passwordIsDisplayed() {
+        return passwordfield.isDisplayed();
+    }
+
+    public boolean loginBtnIsDisplayed() {
+        return loginBtn.isDisplayed();
+    }
+
+
 }
 
 

@@ -1,27 +1,53 @@
 package com.qa.base;
 
+import com.qa.pages.PageManager;
 import com.qa.utils.ConfigReader;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
+import com.qa.utils.Reporter;
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.*;
 
 public class BaseTest {
-    private DriverFactory factory;
+    private WebDriver driver;
 
 
     @BeforeSuite(alwaysRun = true)
     public void setUp() {
         ConfigReader.intConfigReader();
-        factory = new DriverFactory();
-        factory.initDriver();
-        System.out.println("Base Test Executed");
+
+        Reporter.initReporter();
 
 
+
+    }
+
+    @BeforeMethod(alwaysRun = true)
+    public void openUrl() {
+       // System.out.println("before Method");
+        DriverFactory factory = new DriverFactory();
+
+        driver = factory.initDriver();
+        PageManager.intPageManager(driver);
+
+        driver.get(System.getProperty("url"));
+
+
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void quiteSession() {
+
+        driver.quit();
     }
 
 
     @AfterSuite(alwaysRun = true)
     public void tearDown() {
-        factory.getDriver().quit();
+        Reporter.getFlushExtentReport();
 
+
+    }
+
+    public WebDriver getDriver() {
+        return driver;
     }
 }
