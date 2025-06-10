@@ -39,7 +39,7 @@ public class AdminUserManagementPage {
 //        addUserBtn = driver.findElement(By.xpath("//button[normalize-space()='Add']"));
 //        userRoleDrpdwnSelectBtn = driver.findElement(By.xpath("//label[text()='User Role']//following::div[4]"));
 //        employeenamefield = driver.findElement(By.xpath("//input[@placeholder='Type for hints...']"));
-        PageFactory.initElements(driver, this);
+        PageFactory.initElements(driver, this);;
     }
 
 
