@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 public class DashboardTest extends BaseTest {
 
-    @Test(groups = {"reg"})
+    @Test(groups = {"reg", "dashboard"})
     public void dashboardLoadCheck() {
 
         PageManager.getPageManagerObj().getLoginpageObject().login();
@@ -15,10 +15,20 @@ public class DashboardTest extends BaseTest {
         Assert.assertEquals(PageManager.getPageManagerObj().getDashboardPageObject().getTimeAtWork().getText(), "Time at Work");
     }
 
-    @Test(groups = {"reg"})
+    @Test(groups = {"reg", "dashboard"})
     public void logoutValidation() {
         PageManager.getPageManagerObj().getLoginpageObject().login();
         PageManager.getPageManagerObj().getDashboardPageObject().logOut();
+        Assert.assertEquals(getDriver().getCurrentUrl(), "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+
+    }
+
+    @Test(groups = {"reg", "dashboard"})
+    public void unauthorizedAccessAfterLogout() {
+        PageManager.getPageManagerObj().getLoginpageObject().login();
+        PageManager.getPageManagerObj().getDashboardPageObject().logOut();
+        getDriver().navigate().back();
+        getDriver().navigate().refresh();
         Assert.assertEquals(getDriver().getCurrentUrl(), "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
 
     }

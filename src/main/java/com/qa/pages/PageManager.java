@@ -8,6 +8,16 @@ public class PageManager {
     private WebDriver driver;
     private static PageManager pm = null;
     private DashboardPage dp;
+    private AdminUserManagementPage ap;
+
+
+    public AdminUserManagementPage getAdminUserManagementObject() {
+        if (ap == null) {
+            ap = new AdminUserManagementPage(driver);
+            return ap;
+        }
+        return ap;
+    }
 
     public LoginPage getLoginpageObject() {
         if (lp == null) {

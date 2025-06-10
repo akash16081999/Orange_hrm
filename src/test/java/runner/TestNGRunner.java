@@ -24,7 +24,7 @@ public class TestNGRunner {
         if (groupToRun != null && !groupToRun.isEmpty()) {
             for (XmlSuite suite : suites) {
                 for (XmlTest test : suite.getTests()) {
-                    System.out.println("Adding included group to test: " + test.getName());
+                   // System.out.println("Adding included group to test: " + test.getName());
                     test.setIncludedGroups(Collections.singletonList(groupToRun));
                    // System.out.println(test.getIncludedGroups());
                     for (XmlClass clazz : test.getClasses()) {

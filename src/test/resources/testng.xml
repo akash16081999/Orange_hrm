@@ -13,6 +13,7 @@
 
             <class name="com.qa.tests.LoginTest"/>
             <class name="com.qa.tests.DashboardTest"/>
+            <class name="com.qa.tests.AdminUserManagementTest"></class>
 
 
         </classes>

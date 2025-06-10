@@ -9,16 +9,16 @@ import org.testng.annotations.Test;
 public class LoginTest extends BaseTest {
 
 
-    @Test(groups = {"reg", "smoke"})
+    @Test(groups = {"reg", "smoke", "login"})
     public void loginToOrangeHrm() {
-      System.out.println("test invoked");
+
         PageManager.getPageManagerObj().getLoginpageObject().login();
         Assert.assertEquals(getDriver().getCurrentUrl(), "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index");
 
     }
 
 
-    @Test(groups = {"reg"}, dataProvider = "InvalidPassword", dataProviderClass = TestDataProvider.class)
+    @Test(groups = {"reg", "login"}, dataProvider = "InvalidPassword", dataProviderClass = TestDataProvider.class)
     public void loginWithInvaidPassword(String username, String pass) {
 
         PageManager.getPageManagerObj().getLoginpageObject().login(username, pass);
@@ -28,7 +28,7 @@ public class LoginTest extends BaseTest {
 
     }
 
-    @Test(groups = {"reg"}, dataProvider = "Emptyusername", dataProviderClass = TestDataProvider.class)
+    @Test(groups = {"reg", "login"}, dataProvider = "Emptyusername", dataProviderClass = TestDataProvider.class)
     public void loginWithBlankUserName(String username, String pass) {
         PageManager.getPageManagerObj().getLoginpageObject().login(username, pass);
         Assert.assertTrue(PageManager.getPageManagerObj().getLoginpageObject().getAlertForEmptyUsername().isDisplayed());
@@ -36,7 +36,7 @@ public class LoginTest extends BaseTest {
 
     }
 
-    @Test(groups = {"reg"}, dataProvider = "Emptypassword", dataProviderClass = TestDataProvider.class)
+    @Test(groups = {"reg", "login"}, dataProvider = "Emptypassword", dataProviderClass = TestDataProvider.class)
     public void loginWithBlankPassword(String username, String pass) {
         PageManager.getPageManagerObj().getLoginpageObject().login(username, pass);
         Assert.assertTrue(PageManager.getPageManagerObj().getLoginpageObject().getAlertForEmptyUsername().isDisplayed());
@@ -44,7 +44,7 @@ public class LoginTest extends BaseTest {
 
     }
 
-    @Test(groups = {"reg"})
+    @Test(groups = {"reg", "login"})
     public void loginPageUiButtonvisible() {
 
         Assert.assertTrue(PageManager.getPageManagerObj().getLoginpageObject().usenameIsDisplayed());

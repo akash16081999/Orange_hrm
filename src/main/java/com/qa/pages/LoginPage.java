@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
 public class LoginPage {
     private WebDriver driver;
     private WebElement usernamefield;
@@ -69,6 +71,20 @@ public class LoginPage {
         return loginBtn.isDisplayed();
     }
 
+
+    public void sidePannel(String text) {
+
+        List<WebElement> ele = driver.findElements(By.xpath("//div[@class='oxd-sidepanel-body']/ul/li"));
+
+        for (WebElement elemenet : ele) {
+            if (elemenet.getText().equals(text)) {
+                System.out.println( "Element : "+ elemenet.getText());
+                elemenet.click();
+                break;
+            }
+        }
+
+    }
 
 }
 
