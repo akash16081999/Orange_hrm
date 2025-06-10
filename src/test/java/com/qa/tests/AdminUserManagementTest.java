@@ -14,6 +14,7 @@ public class AdminUserManagementTest extends BaseTest {
         PageManager.getPageManagerObj().getAdminUserManagementObject().addUser();
         boolean result = PageManager.getPageManagerObj().getAdminUserManagementObject().userRecordsList("Akash");
         Assert.assertTrue(result);
+        PageManager.getPageManagerObj().getAdminUserManagementObject().deleteUserFromAdminUserManagement("Akash");
 
 
     }
