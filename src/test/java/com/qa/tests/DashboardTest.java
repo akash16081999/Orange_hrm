@@ -1,6 +1,7 @@
 package com.qa.tests;
 
 import com.qa.base.BaseTest;
+import com.qa.base.DriverFactory;
 import com.qa.pages.PageManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -19,7 +20,7 @@ public class DashboardTest extends BaseTest {
     public void logoutValidation() {
         PageManager.getPageManagerObj().getLoginpageObject().login();
         PageManager.getPageManagerObj().getDashboardPageObject().logOut();
-        Assert.assertEquals(getDriver().getCurrentUrl(), "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+        Assert.assertEquals(DriverFactory.getDriver().getCurrentUrl(), "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
 
     }
 
@@ -27,9 +28,9 @@ public class DashboardTest extends BaseTest {
     public void unauthorizedAccessAfterLogout() {
         PageManager.getPageManagerObj().getLoginpageObject().login();
         PageManager.getPageManagerObj().getDashboardPageObject().logOut();
-        getDriver().navigate().back();
-        getDriver().navigate().refresh();
-        Assert.assertEquals(getDriver().getCurrentUrl(), "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+        DriverFactory.getDriver().navigate().back();
+        DriverFactory.getDriver().navigate().refresh();
+        Assert.assertEquals(DriverFactory.getDriver().getCurrentUrl(), "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
 
     }
 

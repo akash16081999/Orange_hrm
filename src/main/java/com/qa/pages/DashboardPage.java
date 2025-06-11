@@ -8,12 +8,12 @@ import java.util.List;
 
 public class DashboardPage {
 
-    private WebElement timeAtWork;
-    private WebDriver driver;
-    private WebElement userProfileDropdownBtn;
+    private final WebElement timeAtWork;
+    private final WebDriver driver;
+    private final WebElement userProfileDropdownBtn;
     private List<WebElement> userProfileDropwdownlist;
 
-     DashboardPage(WebDriver driver) {
+    DashboardPage(WebDriver driver) {
         this.driver = driver;
         timeAtWork = this.driver.findElement(By.xpath("(//div[@class='orangehrm-dashboard-widget-name'])[1]"));
         userProfileDropdownBtn = this.driver.findElement(By.cssSelector(".oxd-userdropdown"));
@@ -26,7 +26,7 @@ public class DashboardPage {
     }
 
 
-    public void logOut(){
+    public void logOut() {
 
         userProfileDropdownBtn.click();
         userProfileDropdownList("Logout");

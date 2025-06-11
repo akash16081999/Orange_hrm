@@ -9,49 +9,45 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import java.time.Duration;
 
 public class DriverFactory {
-    private WebDriver driver;
+
+    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
 
-    public WebDriver initDriver() {
+    public static void initDriver() {
         String browser = System.getProperty("browser");
-        System.out.println("Opened The  :" + browser);
-
-        if (browser.equalsIgnoreCase("chrome")) {
-            ChromeOptions options = new ChromeOptions();
-//            options.addArguments("--headless=new"); // Use --headless=new for Chrome 109+
-//            options.addArguments("--window-size=1920,1080");
-//            options.addArguments("--disable-gpu");
-//            options.addArguments("--no-sandbox");
-//            options.addArguments("--disable-dev-shm-usage");
-//            options.addArguments("--remote-allow-origins=*"); // Optional if you're facing origin issues
-            driver = new ChromeDriver(options);
 
 
-        } else if (browser.equalsIgnoreCase("firefox")) {
-            driver = new FirefoxDriver();
+        switch (browser) {
+            case "chrome":
+                ChromeOptions options = new ChromeOptions();
+                setDriver(new ChromeDriver());
+                break;
+            case "firefox":
+                setDriver(new FirefoxDriver());
+                break;
+            case "edge":
+                setDriver(new EdgeDriver());
+                break;
+            default:
+                try {
+                    throw new Exception("no browser found with given argument :" + browser);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
 
-        } else if (browser.equalsIgnoreCase("edge")) {
-            driver = new EdgeDriver();
-
-        } else {
-            try {
-                throw new Exception("no browser found with given argument :" + browser);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
         }
-        driver.manage().window().maximize();
-        // driver.get(System.getProperty("url"));
+        getDriver().manage().window().maximize();
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-
-        return driver;
 
     }
 
+    public static void setDriver(WebDriver drive) {
+        driver.set(drive);
+    }
 
-    public WebDriver getDriver() {
-        return driver;
+    public static WebDriver getDriver() {
+        return driver.get();
     }
 
 

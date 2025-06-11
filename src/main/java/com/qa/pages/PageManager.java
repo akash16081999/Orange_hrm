@@ -3,10 +3,10 @@ package com.qa.pages;
 import org.openqa.selenium.WebDriver;
 
 public class PageManager {
-
+    private static ThreadLocal<PageManager> pm = new ThreadLocal<>();
     private LoginPage lp;
     private WebDriver driver;
-    private static PageManager pm = null;
+    //private static PageManager pm = null;
     private DashboardPage dp;
     private AdminUserManagementPage ap;
 
@@ -37,14 +37,7 @@ public class PageManager {
 
 
     public static void intPageManager(WebDriver driver) {
-
-//        if (pm == null) {
-//            System.out.println("null");
-
-        pm = new PageManager(driver);
-        System.out.println("not null");
-
-//        }
+        pm.set(new PageManager(driver));
     }
 
     private PageManager(WebDriver driver) {
@@ -54,7 +47,7 @@ public class PageManager {
 
     public static PageManager getPageManagerObj() {
 
-        return pm;
+        return pm.get();
     }
 
 }

@@ -1,6 +1,7 @@
 package com.qa.tests;
 
 import com.qa.base.BaseTest;
+import com.qa.base.DriverFactory;
 import com.qa.pages.PageManager;
 import com.qa.utils.TestDataProvider;
 import org.testng.Assert;
@@ -12,8 +13,9 @@ public class LoginTest extends BaseTest {
     @Test(groups = {"reg", "smoke", "login"})
     public void loginToOrangeHrm() {
 
+
         PageManager.getPageManagerObj().getLoginpageObject().login();
-        Assert.assertEquals(getDriver().getCurrentUrl(), "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index");
+        Assert.assertEquals(DriverFactory.getDriver().getCurrentUrl(), "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index");
 
     }
 

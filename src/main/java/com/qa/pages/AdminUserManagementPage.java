@@ -72,7 +72,7 @@ public class AdminUserManagementPage {
         userSuggestionlistdrpdwn = driver.findElements(By.xpath("//input[@placeholder='Type for hints...']//following::div"));
         // userSuggestionlistdrpdwn = wait.until(ExpectedConditions.visibilityOfAllElements(userSuggestionlistdrpdwn));
         for (WebElement webElement : userSuggestionlistdrpdwn) {
-            System.out.println(webElement.getText());
+          //  System.out.println(webElement.getText());
             if (webElement.getText().contains("kumar kumar")) {
 
                 webElement.click();

@@ -10,6 +10,7 @@ public class AdminUserManagementTest extends BaseTest {
 
     @Test(groups = {"Adminuser", "smoke", "reg"})
     public void addUserWithValidData() {
+        System.out.println("addUserWithValidData" +Thread.currentThread().getId());
         PageManager.getPageManagerObj().getLoginpageObject().login();
 
         PageManager.getPageManagerObj().getAdminUserManagementObject().addUser();
@@ -23,6 +24,7 @@ public class AdminUserManagementTest extends BaseTest {
 
     @Test(groups = {"reg", "Adminuser"})
     public void existingUserValidation() {
+        System.out.println("existingUserValidation" +Thread.currentThread().getId());
         PageManager.getPageManagerObj().getLoginpageObject().login();
         PageManager.getPageManagerObj().getAdminUserManagementObject().addUser();
         PageManager.getPageManagerObj().getAdminUserManagementObject().addUser();

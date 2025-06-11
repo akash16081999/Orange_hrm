@@ -7,36 +7,28 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 
 public class BaseTest {
-    private WebDriver driver;
-
 
     @BeforeSuite(alwaysRun = true)
     public void setUp() {
         ConfigReader.intConfigReader();
-
         Reporter.initReporter();
-
-
 
     }
 
     @BeforeMethod(alwaysRun = true)
     public void openUrl() {
-       // System.out.println("before Method");
-        DriverFactory factory = new DriverFactory();
+        DriverFactory.initDriver();
+        PageManager.intPageManager(DriverFactory.getDriver());
 
-        driver = factory.initDriver();
-        PageManager.intPageManager(driver);
-
-        driver.get(System.getProperty("url"));
+        DriverFactory.getDriver().get(System.getProperty("url"));
 
 
     }
 
     @AfterMethod(alwaysRun = true)
     public void quiteSession() {
+        DriverFactory.getDriver().quit();
 
-        //driver.quit();
     }
 
 
@@ -47,7 +39,5 @@ public class BaseTest {
 
     }
 
-    public WebDriver getDriver() {
-        return driver;
-    }
+
 }
