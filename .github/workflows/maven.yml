@@ -49,7 +49,7 @@ jobs:
 
           Regards,
           GitHub Actions
-        to: akashn1608@gmail.com
+        to: harishk4078@gmail.com
         from: GitHub Actions <akash.email@example.com>
         attachments: test-output/emailable-report.html
 
