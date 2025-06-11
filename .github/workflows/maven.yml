@@ -48,7 +48,7 @@ jobs:
           Please find attached the latest test execution report for OrangeHRM automation.
 
           Regards,
-          GitHub Actionss
+          GitHub Actions
         to: akashn1608@gmail.com
         from: GitHub Actions <akash.email@example.com>
         attachments: test-output/emailable-report.html
