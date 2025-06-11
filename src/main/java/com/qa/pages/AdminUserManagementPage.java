@@ -5,7 +5,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.security.SecureRandom;
+import java.time.Duration;
 import java.util.List;
 
 public class AdminUserManagementPage {
@@ -30,6 +34,8 @@ public class AdminUserManagementPage {
     private WebElement adduserSubmitbtn;
     @FindBy(xpath = "//button[text()=' Yes, Delete ']")
     private WebElement deletepopupBtn;
+    @FindBy(xpath = "//label[text()='Username']//following::span[1]")
+    private WebElement usernameAlreadyExist;
 
 
     private List<WebElement> userSuggestionlistdrpdwn;
@@ -39,7 +45,8 @@ public class AdminUserManagementPage {
 //        addUserBtn = driver.findElement(By.xpath("//button[normalize-space()='Add']"));
 //        userRoleDrpdwnSelectBtn = driver.findElement(By.xpath("//label[text()='User Role']//following::div[4]"));
 //        employeenamefield = driver.findElement(By.xpath("//input[@placeholder='Type for hints...']"));
-        PageFactory.initElements(driver, this);;
+        PageFactory.initElements(driver, this);
+        ;
     }
 
 
@@ -56,12 +63,17 @@ public class AdminUserManagementPage {
 
     private void employeeSuggestionList() {
 
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+
         int count = 0;
+        // wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@placeholder='Type for hints...']//following::div[1]")));
+        //  wait.until(ExpectedConditions.visibilityOfAllElements(userSuggestionList));
         userSuggestionlistdrpdwn = driver.findElements(By.xpath("//input[@placeholder='Type for hints...']//following::div"));
-
+        // userSuggestionlistdrpdwn = wait.until(ExpectedConditions.visibilityOfAllElements(userSuggestionlistdrpdwn));
         for (WebElement webElement : userSuggestionlistdrpdwn) {
-
-            if (webElement.getText().contains("Ravi M B")) {
+            System.out.println(webElement.getText());
+            if (webElement.getText().contains("kumar kumar")) {
 
                 webElement.click();
                 break;
@@ -82,27 +94,30 @@ public class AdminUserManagementPage {
     }
 
     public void addUser() {
-        PageManager.getPageManagerObj().getLoginpageObject().login();
+
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
         PageManager.getPageManagerObj().getLoginpageObject().sidePannel("Admin");
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(addUserBtn));
         addUserBtn.click();
+
         userRoleDrpdwnSelectBtn.click();
         userRoleDropdownList("Admin");
 
         employeenamefield.click();
-        employeenamefield.sendKeys("Ravi M B");
+        employeenamefield.sendKeys("kumar kumar");
         try {
-            Thread.sleep(3000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
         employeeSuggestionList();
         usernameField.click();
-        usernameField.sendKeys("Akash");
+        usernameField.sendKeys("kumar");
         paswordField.click();
         paswordField.sendKeys("Testuser@123");
         confirmPasswordField.click();
@@ -112,21 +127,28 @@ public class AdminUserManagementPage {
         adduserSubmitbtn.click();
 
         try {
-            Thread.sleep(5000);
+            Thread.sleep(7000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        driver.navigate().refresh();
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-       // deleteUserFromAdminUserManagement("Akash");
+        // driver.navigate().refresh();
+//        try {
+//            Thread.sleep(5000);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+        // deleteUserFromAdminUserManagement("Akash");
 
     }
 
     public void deleteUserFromAdminUserManagement(String user) {
+
+        PageManager.getPageManagerObj().getLoginpageObject().sidePannel("Admin");
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
         List<WebElement> userRec = driver.findElements(By.xpath("//div[@class='orangehrm-container']/div/div[2]/div"));
         for (int i = 0; i < userRec.size(); i++) {
@@ -153,6 +175,25 @@ public class AdminUserManagementPage {
         }
         return false;
     }
+
+
+    public WebElement userNameAlreadyExist() {
+        return usernameAlreadyExist;
+    }
+
+    public String generateRandomText(int length) {
+        String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        SecureRandom random = new SecureRandom();
+        StringBuilder sb = new StringBuilder(length);
+
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(CHARACTERS.length());
+            sb.append(CHARACTERS.charAt(index));
+        }
+
+        return sb.toString();
+    }
+
 
 }
 

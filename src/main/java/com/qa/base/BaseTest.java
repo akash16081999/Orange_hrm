@@ -36,7 +36,7 @@ public class BaseTest {
     @AfterMethod(alwaysRun = true)
     public void quiteSession() {
 
-        driver.quit();
+        //driver.quit();
     }
 
 
