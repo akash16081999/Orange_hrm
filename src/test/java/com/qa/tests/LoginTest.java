@@ -3,6 +3,7 @@ package com.qa.tests;
 import com.qa.base.BaseTest;
 import com.qa.base.DriverFactory;
 import com.qa.pages.PageManager;
+import com.qa.utils.Reporter;
 import com.qa.utils.TestDataProvider;
 import org.testng.Assert;
 import org.testng.annotations.Test;

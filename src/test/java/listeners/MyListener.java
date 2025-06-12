@@ -1,25 +1,27 @@
 package listeners;
 
+import com.qa.utils.Reporter;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+import com.qa.utils.Reporter;
 
 public class MyListener implements ITestListener {
 
-    public void onTestStart(ITestResult result) {
 
-        System.out.println("On Test Start :");
+    public void onTestStart(ITestResult result) {
+        Reporter.createTest(result.getName());
+
     }
 
 
     public void onTestSuccess(ITestResult result) {
-        // not implemented
+        Reporter.testPass(result);
     }
 
 
     public void onTestFailure(ITestResult result) {
-
-        System.out.println("Test case failed");
+        Reporter.testFail(result);
     }
 
 
